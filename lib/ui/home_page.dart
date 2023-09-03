@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: const [
         CircleAvatar(
-          backgroundImage: AssetImage("images/profile.jpg"),
+          backgroundImage: AssetImage("images/profile2.jpg"),
         ),
         SizedBox(
           width: 20,
