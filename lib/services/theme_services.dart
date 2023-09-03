@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ThemeService {
   final _box = GetStorage();
@@ -16,4 +17,20 @@ class ThemeService {
     Get.changeThemeMode(_loadThemeFromBox() ? ThemeMode.light : ThemeMode.dark);
     _saveThemeToBox(!_loadThemeFromBox());
   }
+}
+
+TextStyle get subHeadingStyle {
+  return GoogleFonts.lato(
+      textStyle: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Get.isDarkMode ? Colors.grey[400] : Colors.grey));
+}
+
+TextStyle get HeadingStyle {
+  return GoogleFonts.lato(
+      textStyle: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+          color: Get.isDarkMode ? Colors.white : Colors.black));
 }
