@@ -27,6 +27,7 @@ TextStyle get subHeadingStyle {
           color: Get.isDarkMode ? Colors.grey[400] : Colors.grey));
 }
 
+// ignore: non_constant_identifier_names
 TextStyle get HeadingStyle {
   return GoogleFonts.lato(
       textStyle: TextStyle(

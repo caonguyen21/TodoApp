@@ -44,20 +44,18 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  DateFormat.yMMMd().format(DateTime.now()),
-                  style: subHeadingStyle,
-                ),
-                Text(
-                  "Today",
-                  style: HeadingStyle,
-                )
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                DateFormat.yMMMd().format(DateTime.now()),
+                style: subHeadingStyle,
+              ),
+              Text(
+                "Today",
+                style: HeadingStyle,
+              )
+            ],
           ),
           MyButton(
               label: "+ Add Task", onTap: () => Get.to(const AddTaskPage()))
@@ -107,15 +105,15 @@ class _HomePageState extends State<HomePage> {
         selectionColor: primaryClr,
         selectedTextColor: Colors.white,
         dateTextStyle: GoogleFonts.lato(
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
               fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey),
         ),
         dayTextStyle: GoogleFonts.lato(
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey),
         ),
         monthTextStyle: GoogleFonts.lato(
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
               fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey),
         ),
         onDateChange: (date) {
