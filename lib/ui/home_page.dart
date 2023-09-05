@@ -5,7 +5,6 @@ import 'package:flutter_to_do_app/controllers/task_controller.dart';
 import 'package:flutter_to_do_app/services/theme_services.dart';
 import 'package:flutter_to_do_app/ui/add_task_bar.dart';
 import 'package:flutter_to_do_app/ui/theme.dart';
-import 'package:flutter_to_do_app/ui/widgets/button.dart';
 import 'package:flutter_to_do_app/ui/widgets/task_tile.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,11 +36,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _appBar(),
-        backgroundColor: context.theme.backgroundColor,
-        body: Column(
-          children: [_addTaskBar(), _addDateBar(), _showTasks()],
-        ));
+      appBar: _appBar(),
+      backgroundColor: context.theme.backgroundColor,
+      body: Column(children: [_addTaskBar(), _addDateBar(), _showTasks()]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Get.to(() => const AddTaskPage());
+          _taskController.getTasks();
+        },
+        child: Icon(Icons.add),
+        backgroundColor: primaryClr, // You can set the color you prefer.
+      ),
+    );
   }
 
   _addTaskBar() {
@@ -63,12 +69,6 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          MyButton(
-              label: "+ Add Task",
-              onTap: () async {
-                await Get.to(() => const AddTaskPage());
-                _taskController.getTasks();
-              })
         ],
       ),
     );
@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
               body: Get.isDarkMode
                   ? "You changed your theme back !"
                   : "You change your theme");
+          //notifyHelper.scheduledNotification();
         },
         child: Icon(
           Get.isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
@@ -127,7 +128,9 @@ class _HomePageState extends State<HomePage> {
               fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey),
         ),
         onDateChange: (date) {
-          _selectedDate = date;
+          setState(() {
+            _selectedDate = date;
+          });
         },
       ),
     );
@@ -138,23 +141,53 @@ class _HomePageState extends State<HomePage> {
       return ListView.builder(
           itemCount: _taskController.taskList.length,
           itemBuilder: (_, index) {
-            return AnimationConfiguration.staggeredList(
-                position: index,
-                child: SlideAnimation(
-                  child: FadeInAnimation(
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _showBottomSheet(
-                                context, _taskController.taskList[index]);
-                          },
-                          child: TaskTile(_taskController.taskList[index]),
-                        )
-                      ],
+            Task task = _taskController.taskList[index];
+            print(task.toJson());
+            if (task.repeat == 'Daily') {
+              DateTime date =
+                  DateFormat("hh:mm a").parse(task.startTime.toString());
+              var myTime = DateFormat("HH:mm").format(date);
+              notifyHelper.scheduledNotification(
+                  int.parse(myTime.toString().split(":")[0]),
+                  int.parse(myTime.toString().split(":")[1]),
+                  task);
+              return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: SlideAnimation(
+                    child: FadeInAnimation(
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              _showBottomSheet(context, task);
+                            },
+                            child: TaskTile(task),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ));
+                  ));
+            }
+            if (task.date == DateFormat.yMd().format(_selectedDate)) {
+              return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: SlideAnimation(
+                    child: FadeInAnimation(
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              _showBottomSheet(context, task);
+                            },
+                            child: TaskTile(task),
+                          )
+                        ],
+                      ),
+                    ),
+                  ));
+            } else {
+              return Container();
+            }
           });
     }));
   }
