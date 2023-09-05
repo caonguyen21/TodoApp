@@ -68,7 +68,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 children: [
                   Expanded(
                       child: MyInputField(
-                    title: "Start Date",
+                    title: "Start Time",
                     hint: _startTime,
                     widget: IconButton(
                       onPressed: () {
@@ -85,7 +85,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                   Expanded(
                       child: MyInputField(
-                    title: "End Date",
+                    title: "End Time",
                     hint: _endTime,
                     widget: IconButton(
                       onPressed: () {
@@ -177,9 +177,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   _validateData() {
-    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty)
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
+      Get.back();
       _addTaskToDb();
-    else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
       Get.snackbar("Required", "All fields are required!",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.white,
@@ -218,7 +219,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ? primaryClr
                     : index == 1
                         ? Colors.pink
-                        : Colors.yellow,
+                        : Colors.yellow[700],
                 child: _selectedColor == index
                     ? const Icon(
                         Icons.done,
@@ -275,27 +276,34 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   _getTimeForUser({required bool isStartTime}) async {
-    _showTimePicker();
-    var pickerTime = await _showTimePicker();
-    String _fomatedTime = pickerTime.format(context);
-    if (pickerTime == null) {
-      print("Time canceld!");
-    } else if (isStartTime == true) {
-      _startTime = _fomatedTime;
-    } else if (isStartTime == false) {
-      setState(() {
-        _endTime = _fomatedTime;
-      });
+    TimeOfDay? pickerTime = await _showTimePicker();
+
+    if (pickerTime != null) {
+      String formattedTime = pickerTime.format(context);
+
+      if (isStartTime) {
+        setState(() {
+          _startTime = formattedTime;
+        });
+      } else {
+        setState(() {
+          _endTime = formattedTime;
+        });
+      }
+    } else {
+      print("Time canceled!");
     }
   }
 
-  _showTimePicker() {
+  Future<TimeOfDay?> _showTimePicker() async {
     return showTimePicker(
-        initialEntryMode: TimePickerEntryMode.input,
-        context: context,
-        initialTime: TimeOfDay(
-            hour: int.parse(_startTime.split(":")[0]),
-            minute: int.parse(_startTime.split(":")[1].split(" ")[0])));
+      initialEntryMode: TimePickerEntryMode.input,
+      context: context,
+      initialTime: TimeOfDay(
+        hour: int.parse(_startTime.split(":")[0]),
+        minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
+      ),
+    );
   }
 
   _addTaskToDb() async {
