@@ -14,11 +14,9 @@
 ## Ảnh Chụp Màn Hình
 
 ![Screenshot_1693945714](https://github.com/caonguyen21/TodoApp/assets/106511965/c40c30b1-4862-4ca7-b59f-484bc89a5634)
-
 ![Screenshot_1693945736](https://github.com/caonguyen21/TodoApp/assets/106511965/74699444-f88b-45ca-bfc7-6e55b92221e5)
 
 ![Screenshot_1693945758](https://github.com/caonguyen21/TodoApp/assets/106511965/3c4f9935-f974-4e95-a9da-b52b6fde3453)
-
 ![Screenshot_1693945751](https://github.com/caonguyen21/TodoApp/assets/106511965/91abb541-9a07-4323-9dca-4828e38f1423)
 
 ## Thư Viện và Công Cụ Sử Dụng
