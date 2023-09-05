@@ -43,6 +43,7 @@ dependencies:
   flutter_local_notifications:
   flutter_native_timezone:
   permission_handler:
+  sqflite:
 dev_dependencies:
   flutter_test:
     sdk: flutter
