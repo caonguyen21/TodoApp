@@ -13,11 +13,11 @@
 
 ## Ảnh Chụp Màn Hình
 
-![Screenshot_1693945714](https://github.com/caonguyen21/TodoApp/assets/106511965/c40c30b1-4862-4ca7-b59f-484bc89a5634)
-![Screenshot_1693945736](https://github.com/caonguyen21/TodoApp/assets/106511965/74699444-f88b-45ca-bfc7-6e55b92221e5)
+![1](https://github.com/caonguyen21/TodoApp/assets/106511965/a47c7d81-ffbf-4f54-9f41-6e122fe20dc7)
 
-![Screenshot_1693945758](https://github.com/caonguyen21/TodoApp/assets/106511965/3c4f9935-f974-4e95-a9da-b52b6fde3453)
-![Screenshot_1693945751](https://github.com/caonguyen21/TodoApp/assets/106511965/91abb541-9a07-4323-9dca-4828e38f1423)
+![2](https://github.com/caonguyen21/TodoApp/assets/106511965/128c5191-ee25-452a-9c69-8313e6478e15)
+
+![860shots_so](https://github.com/caonguyen21/TodoApp/assets/106511965/93f12a2c-0c6b-4405-b7b3-890a05677e3e)
 
 ## Thư Viện và Công Cụ Sử Dụng
 
