@@ -19,7 +19,7 @@ jobs:
           channel: 'stable'
           architecture: x64
 
-      # Install dependencies
+      # Install Flutter dependencies
       - name: Install Flutter dependencies
         run: flutter pub get
       
