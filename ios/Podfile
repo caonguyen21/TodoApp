@@ -1,5 +1,8 @@
 platform :ios, '12.0'
 
+# Add this line to include the podhelper.rb file
+require File.expand_path('../flutter/podhelper.rb', __FILE__)
+
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
