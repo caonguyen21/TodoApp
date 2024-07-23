@@ -5,9 +5,14 @@ def flutter_install_all_ios_pods(flutter_application_path = nil)
   raise 'You must specify the Flutter application path' unless flutter_application_path
 
   # Read the .flutter-plugins-dependencies file to get the list of plugins.
-  plugin_pods = flutter_parse_dependencies_file(flutter_application_path)
-  plugin_pods.each do |plugin|
-    install_plugin_pod(plugin['name'], plugin['path'])
+  dependencies_file = File.join(flutter_application_path, '.flutter-plugins-dependencies')
+  if File.exist?(dependencies_file)
+    plugin_pods = flutter_parse_dependencies_file(flutter_application_path)
+    plugin_pods.each do |plugin|
+      install_plugin_pod(plugin['name'], plugin['path'])
+    end
+  else
+    puts "Warning: .flutter-plugins-dependencies file not found."
   end
 end
 
